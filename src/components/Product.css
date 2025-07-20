@@ -1,0 +1,40 @@
+.productRowWrapper {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  overflow-x: auto;
+}
+
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.productCard {
+  flex: 0 0 auto;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.card img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  min-height: 60px;
+}
