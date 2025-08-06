@@ -44,6 +44,25 @@
 .icon-link:hover svg {
   color: rgb(111, 185, 225);
 }
+
+.right-nav .nav-link {
+  margin-left: 10px;
+  margin-right: 5px;
+  padding: 5px 8px;
+}
+
+
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
 .cartCount {
   width: 18px;
   height: 18px;

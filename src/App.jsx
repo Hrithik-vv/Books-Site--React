@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import { useState } from "react";
+import Registor from "./pages/Registration";
 
 function App() {
   const [cartItems,setCartItem] =useState(0)
@@ -93,6 +94,8 @@ function App() {
         <Route path="/"element={<><Banner /><Titile /><Home  setCartItem={setCartItem } products={products} /></>}/>
         <Route path="/about" element={<About />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Registor" element={<Registor />} />
+
       </Routes>
       <Footer />
     </Router>
