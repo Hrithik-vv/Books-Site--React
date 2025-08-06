@@ -4,8 +4,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Header.css";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
 
-function Header() {
+function Header({ cartItems,setCartItem }) {
   return (
     <Navbar collapseOnSelect expand="lg" className="custom-nav">
       <Container>
@@ -13,10 +15,10 @@ function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features" className="nav-spacing">
+            <Nav.Link as={Link} to="/" className="nav-spacing">
               Home
             </Nav.Link>
-            <Nav.Link href="#pricing" className="nav-spacing">
+            <Nav.Link as={Link} to="/About" className="nav-spacing">
               About Us
             </Nav.Link>
             <NavDropdown title="Catergoties" id="collapsible-nav-dropdown">
@@ -29,10 +31,17 @@ function Header() {
           </Nav>
           <Nav>
             <Nav.Link href="#search" className="icon-link">
-              <FaSearch size={18} />
+              <FaSearch />
             </Nav.Link>
-            <Nav.Link href="#cart" className="icon-link">
-              <FaShoppingCart size={18} />
+            <Nav.Link href="#cart" className="position-relative icon-link">
+              <div style={{ position: "relative", display: "inline-block" }}>
+                <FaCartPlus size={20} />
+                <span className="cartCount">{cartItems}</span>
+              </div>
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/Login" className="nav-spacing">
+              Login
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

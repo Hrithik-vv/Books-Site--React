@@ -4,9 +4,13 @@ import Banner from "./components/Banner";
 import Home from "./pages/Home";
 import Titile from "./components/Titile";
 import Footer from "./components/Footer";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import { useState } from "react";
 
 function App() {
+  const [cartItems,setCartItem] =useState(0)
   const products = [
     {
       id: 1,
@@ -83,13 +87,15 @@ function App() {
   ];
 
   return (
-    <>
-      <Header />
-      <Banner />
-      <Titile />
-      <Home products={products} />
-     <Footer/>
-    </>
+    <Router>
+      <Header cartItems={cartItems} />
+      <Routes>
+        <Route path="/"element={<><Banner /><Titile /><Home  setCartItem={setCartItem } products={products} /></>}/>
+        <Route path="/about" element={<About />} />
+        <Route path="/Login" element={<Login />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 

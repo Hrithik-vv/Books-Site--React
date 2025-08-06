@@ -44,3 +44,18 @@
 .icon-link:hover svg {
   color: rgb(111, 185, 225);
 }
+.cartCount {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(222, 223, 223, 0.537);
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  color: black;
+  top: 0;
+  right: 0px;
+  border-radius: 10px;
+}
