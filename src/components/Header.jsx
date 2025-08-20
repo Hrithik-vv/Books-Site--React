@@ -21,7 +21,9 @@ function Header({ cartItems, setCartItem }) {
               About Us
             </Nav.Link>
             <NavDropdown title="Categories" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Fiction</NavDropdown.Item>
+              <Nav.Link as={Link} to="/Users" className="nav-spacing">
+              Users
+            </Nav.Link>
               <NavDropdown.Item href="#action/3.2">Romance</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Comics</NavDropdown.Item>
               <NavDropdown.Divider />
@@ -29,7 +31,7 @@ function Header({ cartItems, setCartItem }) {
             </NavDropdown>
           </Nav>
 
-          {/* RIGHT SIDE NAV */}
+        
           <Nav className="ms-auto right-nav">
             <Nav.Link href="#search" className="icon-link">
               <FaSearch />

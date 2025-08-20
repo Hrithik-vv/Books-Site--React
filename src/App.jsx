@@ -9,6 +9,10 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import { useState } from "react";
 import Registor from "./pages/Registration";
+import Users from "./pages/users";
+import { ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const [cartItems,setCartItem] =useState(0)
@@ -95,9 +99,13 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Registor" element={<Registor />} />
+        <Route path="/Users" element={<Users />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+
 
       </Routes>
       <Footer />
+       <ToastContainer position="top-right" autoClose={3000} />
     </Router>
   );
 }

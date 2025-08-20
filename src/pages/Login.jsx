@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,8 +19,27 @@ const Login = () => {
     }));
   };
 
-  // console.log("email------>",loginInfo.email);
-  // console.log("password-------->",loginInfo.password);
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const user = users.find((user) => user.email === loginInfo.email);
+
+    if (!user) {
+      toast.error("Invalid Credentials");
+      return;
+    }
+
+    if (user.password !== loginInfo.password) {
+      toast.error("Invalid Credentials");
+      return;
+    }
+
+    toast.success("Login Successful ");
+    navigate('/Dashboard')
+ 
+  };
 
   return (
     <Container className="my-4">
@@ -29,12 +51,12 @@ const Login = () => {
 
       <Row className="justify-content-center">
         <Col md={4}>
-          <Form>
+          <Form onSubmit={handleLogin}>
             <Form.Group className="mb-2">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Enter Email "
+                placeholder="Enter Email"
                 name="email"
                 value={loginInfo.email}
                 onChange={handleChange}
@@ -58,7 +80,7 @@ const Login = () => {
               </Button>
             </div>
             <div className="mt-3 text-center">
-              Already have an account? <Link to="/Registor">Sing Up</Link>
+              Don't have an account? <Link to="/Registor">Sign Up</Link>
             </div>
           </Form>
         </Col>
