@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -23,22 +23,16 @@ const Login = () => {
     e.preventDefault();
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find((u) => u.email === loginInfo.email);
 
-    const user = users.find((user) => user.email === loginInfo.email);
-
-    if (!user) {
+    if (!user || user.password !== loginInfo.password) {
       toast.error("Invalid Credentials");
       return;
     }
 
-    if (user.password !== loginInfo.password) {
-      toast.error("Invalid Credentials");
-      return;
-    }
-
-    toast.success("Login Successful ");
-    navigate('/Dashboard')
- 
+    toast.success("Login Successful");
+    setIsAuthenticated(true);
+    navigate("/dashboard");
   };
 
   return (

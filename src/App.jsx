@@ -2,20 +2,31 @@ import Header from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Banner from "./components/Banner";
 import Home from "./pages/Home";
-import Titile from "./components/Titile";
+import Title from "./components/Titile";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Registor from "./pages/Registration";
-import Users from "./pages/users";
-import { ToastContainer} from 'react-toastify';
+import Users from "./pages/Users";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./pages/Dashboard";
 
+function ProtectedRoute({ isAuthenticated, children }) {
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
+}
+
 function App() {
-  const [cartItems,setCartItem] =useState(0)
+  const [cartItems, setCartItem] = useState(0);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const products = [
     {
       id: 1,
@@ -91,21 +102,49 @@ function App() {
     },
   ];
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      window.history.pushState({}, "", "/dashboard");
+    }
+  }, [isAuthenticated]);
+
   return (
     <Router>
       <Header cartItems={cartItems} />
+
       <Routes>
-        <Route path="/"element={<><Banner /><Titile /><Home  setCartItem={setCartItem } products={products} /></>}/>
+        {/* Public Routes */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Banner />
+              <Title />
+              <Home setCartItem={setCartItem} products={products} />
+            </>
+          }
+        />
         <Route path="/about" element={<About />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Registor" element={<Registor />} />
-        <Route path="/Users" element={<Users />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route path="/registor" element={<Registor />} />
+        <Route path="/users" element={<Users />} />
 
-
+        {/* Protected Route */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Dashboard setIsAuthenticated={setIsAuthenticated} />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
+
       <Footer />
-       <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} />
     </Router>
   );
 }
